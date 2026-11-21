@@ -204,9 +204,10 @@ ul {
 }
 
 .btn-sm {
-    padding: 8px 16px;
-    font-size: 0.875rem;
+    padding: 10px 16px;
+    font-size: 0.9rem;
     border-radius: 8px;
+    width: 100%;
 }
 
 .btn-block {
@@ -237,7 +238,7 @@ header {
     width: 100%;
     z-index: 1000;
     transition: var(--transition);
-    padding: 20px 0;
+    padding: 14px 0;
 }
 
 header.scrolled {
@@ -245,7 +246,7 @@ header.scrolled {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--glass-border);
-    padding: 12px 0;
+    padding: 10px 0;
 }
 
 .nav-container {
@@ -255,40 +256,36 @@ header.scrolled {
 }
 
 .logo {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
     z-index: 1001;
+    flex-shrink: 0;
 }
 
-.logo-icon {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--accent) 0%, #b8860b 100%);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    font-size: 1.2rem;
+.brand-logo-img {
+    display: block;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65));
+    transition: var(--transition);
 }
 
-.logo-text {
-    display: flex;
-    flex-direction: column;
+.header-logo-img {
+    height: 62px;
+    max-width: 240px;
 }
 
-.logo-text span {
-    font-weight: 700;
-    font-size: 1.25rem;
-    line-height: 1.1;
+header.scrolled .header-logo-img {
+    height: 54px;
 }
 
-.logo-text small {
-    font-size: 0.75rem;
-    color: var(--accent);
-    font-weight: 500;
-    letter-spacing: 0.5px;
+.footer-logo-img {
+    height: 82px;
+    max-width: 280px;
+}
+
+.logo:hover .brand-logo-img {
+    transform: scale(1.03);
 }
 
 .nav-links {
@@ -319,7 +316,7 @@ header.scrolled {
 }
 
 /* =========================================
-   HERO SECTION
+   HERO SECTION & REAL FLAGS POSTER WALL
 ========================================= */
 #hero {
     min-height: 100vh;
@@ -328,6 +325,91 @@ header.scrolled {
     padding-top: 120px;
     padding-bottom: 60px;
     position: relative;
+    overflow: hidden;
+}
+
+/* Animated Wall of Real Country Flags */
+.hero-flags-wall {
+    position: absolute;
+    inset: -15%;
+    width: 130%;
+    height: 130%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 22px;
+    transform: rotate(-8deg);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.flag-marquee-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 22px;
+    will-change: transform;
+}
+
+.flag-marquee-row.scroll-left {
+    animation: marqueeLeft 48s linear infinite;
+}
+
+.flag-marquee-row.scroll-right {
+    animation: marqueeRight 54s linear infinite;
+}
+
+.real-flag-poster {
+    width: 185px;
+    height: 120px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    flex: 0 0 auto;
+    background: var(--surface-color);
+}
+
+.real-flag-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Subtle glossy wave sheen across each flag */
+.real-flag-poster::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(255, 255, 255, 0.03) 48%,
+        rgba(0, 0, 0, 0.22) 100%
+    );
+    pointer-events: none;
+}
+
+/* Soft dark vignette so flags stay clearly visible while text stays sharp */
+.hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 26% 50%, rgba(3, 7, 18, 0.72) 0%, rgba(3, 7, 18, 0.35) 58%, rgba(3, 7, 18, 0.65) 100%),
+        linear-gradient(to bottom, rgba(3, 7, 18, 0.78) 0%, rgba(3, 7, 18, 0.25) 22%, rgba(3, 7, 18, 0.3) 78%, var(--bg-color) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes marqueeLeft {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marqueeRight {
+    0% { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
 }
 
 .hero-container {
@@ -335,18 +417,22 @@ header.scrolled {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     align-items: center;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-title {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     margin-bottom: 24px;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
 }
 
 .hero-subtitle {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
-    color: var(--text-secondary);
+    color: var(--text-primary);
     margin-bottom: 40px;
     max-width: 500px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
 }
 
 .hero-btns {
@@ -398,12 +484,12 @@ header.scrolled {
 }
 
 .floating-card {
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(15, 23, 42, 0.88);
     backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
     padding: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
     position: absolute;
     animation: float 6s ease-in-out infinite;
 }
@@ -490,7 +576,6 @@ header.scrolled {
 ========================================= */
 .destination-grid {
     display: grid;
-    /* Safe responsive grid: min 280px wide, 1fr max */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
@@ -513,7 +598,7 @@ header.scrolled {
 }
 
 .dest-img {
-    height: 220px;
+    height: 200px;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -521,14 +606,23 @@ header.scrolled {
 }
 
 .dest-badge {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(8px);
     padding: 8px 16px;
     border-radius: 100px;
     font-size: 0.875rem;
     font-weight: 600;
-    display: inline-block;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.flag-icon {
+    width: 20px;
+    height: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 .dest-content {
@@ -539,43 +633,48 @@ header.scrolled {
 }
 
 .dest-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 12px;
     margin-bottom: 24px;
     flex-grow: 1;
 }
 
 .dest-features span {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    font-size: 0.9rem;
+    color: var(--text-primary);
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 10px;
 }
 
 .dest-features i {
     color: var(--accent);
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    margin-top: 4px;
 }
 
 .dest-footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 16px;
     border-top: 1px solid var(--border-color);
     padding-top: 20px;
-    gap: 16px;
+    margin-top: auto;
 }
 
 .cost {
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .cost strong {
-    color: var(--text-primary);
-    font-size: 1rem;
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 /* =========================================
@@ -777,7 +876,7 @@ header.scrolled {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
-    word-break: break-word; /* Prevents email from overflowing */
+    word-break: break-word;
 }
 
 .info-text a:hover {
@@ -855,7 +954,7 @@ footer {
     color: var(--text-secondary);
     margin: 20px 0;
     font-size: 0.95rem;
-    max-width: 300px;
+    max-width: 320px;
 }
 
 .social-links {
@@ -996,6 +1095,17 @@ footer {
         display: block;
     }
 
+    .header-logo-img,
+    header.scrolled .header-logo-img {
+        height: 48px;
+        max-width: 185px;
+    }
+
+    .footer-logo-img {
+        height: 68px;
+        max-width: 230px;
+    }
+
     .nav-links {
         position: fixed;
         top: 0;
@@ -1027,6 +1137,11 @@ footer {
         padding: 60px 0;
     }
 
+    .real-flag-poster {
+        width: 140px;
+        height: 92px;
+    }
+
     .bento-grid {
         grid-template-columns: 1fr;
     }
@@ -1049,12 +1164,10 @@ footer {
         text-align: center;
     }
 
-    /* Form stacking */
     .form-row {
         grid-template-columns: 1fr;
     }
 
-    /* Contact Wrapper Fixes */
     .contact-wrapper {
         padding: 30px 20px;
         border-radius: 20px;
@@ -1073,6 +1186,12 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .header-logo-img,
+    header.scrolled .header-logo-img {
+        height: 42px;
+        max-width: 165px;
+    }
+
     .hero-btns {
         flex-direction: column;
         width: 100%;
@@ -1082,24 +1201,8 @@ footer {
         width: 100%;
     }
 
-    /* Force Destination Grid to 1 column on small phones */
     .destination-grid {
         grid-template-columns: 1fr;
-    }
-
-    .dest-features {
-        grid-template-columns: 1fr; /* Stack features vertically */
-        gap: 8px;
-    }
-
-    .dest-footer {
-        flex-direction: column;
-        align-items: stretch; /* Make button full width */
-    }
-
-    .dest-footer .btn {
-        width: 100%;
-        margin-top: 10px;
     }
 
     .contact-wrapper {
