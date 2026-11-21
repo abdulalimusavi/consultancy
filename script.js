@@ -15,39 +15,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.getElementById('nav-links');
     const body = document.body;
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        body.classList.toggle('no-scroll');
-        
+    const closeMobileMenu = () => {
+        navLinks.classList.remove('active');
+        body.classList.remove('no-scroll');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open Menu');
         const icon = hamburger.querySelector('i');
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+    };
+
+    const openMobileMenu = () => {
+        navLinks.classList.add('active');
+        body.classList.add('no-scroll');
+        hamburger.classList.add('is-open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        hamburger.setAttribute('aria-label', 'Close Menu');
+        const icon = hamburger.querySelector('i');
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+    };
+
+    hamburger.addEventListener('click', () => {
         if (navLinks.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-xmark');
+            closeMobileMenu();
         } else {
-            icon.classList.remove('fa-xmark');
-            icon.classList.add('fa-bars');
+            openMobileMenu();
         }
     });
 
     // Close mobile menu when a link is clicked
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            body.classList.remove('no-scroll');
-            const icon = hamburger.querySelector('i');
-            icon.classList.remove('fa-xmark');
-            icon.classList.add('fa-bars');
-        });
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close mobile menu with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            closeMobileMenu();
+        }
     });
 
     // Reset mobile menu and scroll lock on window resize
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            navLinks.classList.remove('active');
-            body.classList.remove('no-scroll');
-            const icon = hamburger.querySelector('i');
-            icon.classList.remove('fa-xmark');
-            icon.classList.add('fa-bars');
+        if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+            closeMobileMenu();
         }
     });
 
