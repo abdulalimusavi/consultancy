@@ -19,27 +19,27 @@
 <body>
 
     <!-- Background Glow Effects -->
-    <div class="glow-blob blob-1"></div>
-    <div class="glow-blob blob-2"></div>
-    <div class="glow-blob blob-3"></div>
+    <div class="glow-blob blob-1" aria-hidden="true"></div>
+    <div class="glow-blob blob-2" aria-hidden="true"></div>
+    <div class="glow-blob blob-3" aria-hidden="true"></div>
 
     <!-- ================= HEADER / NAVIGATION ================= -->
     <header id="header">
         <div class="container nav-container">
-            <a href="#" class="logo" aria-label="SF Study Abroad Consultants Home">
+            <a href="#hero" class="logo" aria-label="SF Study Abroad Consultants Home">
                 <img src="sf-logo.png" alt="SF Study Abroad Consultants (Pvt.) Ltd. Logo" class="brand-logo-img header-logo-img">
             </a>
 
-            <nav class="nav-links" id="nav-links">
+            <nav class="nav-links" id="nav-links" aria-label="Primary Navigation">
                 <a href="#hero">Home</a>
                 <a href="#destinations">Destinations</a>
                 <a href="#services">Services</a>
                 <a href="#why-us">Why Us</a>
                 <a href="#contact">Contact</a>
-                <a href="#contact" class="btn btn-primary">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-primary nav-cta">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
             </nav>
 
-            <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+            <button type="button" class="hamburger" id="hamburger" aria-label="Open Menu" aria-expanded="false" aria-controls="nav-links">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -479,7 +479,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="#" class="logo" aria-label="SF Study Abroad Consultants Home">
+                    <a href="#hero" class="logo" aria-label="SF Study Abroad Consultants Home">
                         <img src="sf-logo.png" alt="SF Study Abroad Consultants (Pvt.) Ltd. Logo" class="brand-logo-img footer-logo-img">
                     </a>
                     <p>Making Future Globally. We are your trusted partners in securing admissions and visas for top universities in South Korea, China, Italy, Romania, and beyond.</p>
