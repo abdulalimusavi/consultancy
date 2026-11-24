@@ -99,11 +99,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const flagsWall = document.getElementById('hero-flags-wall');
     if (flagsWall) {
         const countryRows = [
-            ['kr', 'cn', 'it', 'ro', 'tr', 'my', 'gb', 'au', 'us', 'eu'],
+            ['kr', 'cn', 'it', 'ro', 'tr', 'my', 'gb', 'au', 'nz', 'us', 'eu'],
             ['ca', 'de', 'fr', 'se', 'nz', 'jp', 'es', 'nl', 'ch', 'ie'],
-            ['us', 'gb', 'kr', 'it', 'au', 'cn', 'tr', 'ro', 'my', 'de'],
+            ['us', 'gb', 'kr', 'it', 'au', 'cn', 'tr', 'ro', 'nz', 'my', 'de'],
             ['eu', 'ca', 'fr', 'jp', 'se', 'nz', 'nl', 'es', 'ie', 'ch'],
-            ['kr', 'it', 'gb', 'us', 'cn', 'au', 'tr', 'my', 'ro', 'eu'],
+            ['kr', 'it', 'gb', 'us', 'cn', 'au', 'tr', 'my', 'ro', 'nz', 'eu'],
             ['de', 'fr', 'ca', 'se', 'jp', 'nl', 'nz', 'ch', 'es', 'ie']
         ];
 
